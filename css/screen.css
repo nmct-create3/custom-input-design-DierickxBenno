@@ -47,6 +47,8 @@
     --global-color-neutral-900: #35374d;
     --global-color-neutral-1000: #20223a;
 
+    
+
     /* border stuff */
     --global-borderRadius: 3px;
     --global-borderWidth: 1px;
@@ -71,7 +73,7 @@
     /*  = 48px */
     --global-whitespace-xxl: calc(var(--global-whitespace) * 3);
     /*  = 72px */
-    --global-input-backgroundColor: White;
+    --global-input-backgroundColor: white;
     --global-input-color: var(--global-color-neutral-1000);
     --global-input-borderColor: var(--global-color-neutral-100);
     --global-input-hover-borderColor: var(--global-color-neutral-200);
@@ -80,6 +82,9 @@
     
     --global-checkbox-size: 16px;
     --global-transition-timing-alpha: .3s;
+
+    --global-page-color: var(--global-color-neutral-1000);
+    --global-page-backgroundColor: var(--global-color-neutral-000);
 
 
 }
@@ -98,10 +103,27 @@ html {
     line-height: 1.5;
     font-family: "Inter Web", Helvetica, arial, sans-serif;
     color: var(--global-color-neutral-1000);
-    background-color: var(--global-color-neutral-000);
+    background-color: var(--global-page-backgroundColor);
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --global-page-color: White;
+        --global-page-backgroundColor: var(--global-color-neutral-1000);
+        --global-input-backgroundColor: var(--global-page-backgroundColor);
+        --global-input-borderColor: var(--global-page-backgroundColor);
+        /* --global-color-border-hover: var(--global-color-neutral-700); */
+    }
+}
+
+
+
+html {
+    color: var(--global-page-color); 
+    background-color: var(--global-page-backgroundColor);
 }
 
 *,
@@ -521,6 +543,7 @@ input::placeholder {
     Website main logo
 */
 
+
 .c-logo {
     height: var(--global-whitespace);
     display: flex;
@@ -534,16 +557,24 @@ input::placeholder {
 }
 
 .c-logo__path--1 {
-    fill: var(--global-color-neutral-1000);
-}
+    fill: var(--logo__path--1--fill, var(--global-color-neutral-1000));
+  }
+  
+  .c-logo__path--2 {
+    fill: var(--logo__path--2--fill, var(--global-color-alpha));
+  }
+  
+  .c-logo__path--3 {
+    fill: var(--logo__path--3--fill, var(--global-color-alpha-x-dark));
+  }
 
-.c-logo__path--2 {
-    fill: var(--global-color-alpha);
-}
-
-.c-logo__path--3 {
-    fill: var(--global-color-alpha-x-dark);
-}
+@media (prefers-color-scheme: dark) {
+    .c-logo {
+      --logo__path--1--fill: White;
+      --logo__path--2--fill: var(--logo__path--1--fill);
+      --logo__path--3--fill: var(--logo__path--1--fill);
+    }
+  }
 
 /*
     Component: Card
@@ -567,7 +598,7 @@ input::placeholder {
 
 .c-card__footer {
     text-align: center;
-    border-top: var(--global-borderWidth) solid var(--global-color-neutral-100);
+    border-top: var(--global-borderWidth) solid var(--global-input-borderColor);
 }
 
 .c-card__title {
@@ -596,6 +627,20 @@ input::placeholder {
     }
 }
 
+@media (prefers-color-scheme: dark) {
+    .c-card{
+        background-color: var(--global-color-neutral-1000);
+    }
+    .c-card__body {
+      color: white;
+      background-color: var(--global-color-neutral-900);
+    }
+    .c-card__footer{
+        color: white;
+        background-color: var(--global-color-neutral-900);
+    }
+  }
+
 /*
     Component: Forms
     ---
@@ -606,6 +651,7 @@ input::placeholder {
     display: flex;
     align-items: center;
 }
+
 
 /*
     Component: Input
@@ -640,6 +686,12 @@ input::placeholder {
     box-shadow: 0 0 0 3px var(--global-color-alpha-x-transparent);
 }
 
+@media (prefers-color-scheme: dark) {
+    .c-input{
+        background-color: var(--global-page-backgroundColor);
+    }
+}
+
 label svg{
     /* display: none; */
     height: 10px;
@@ -647,6 +699,13 @@ label svg{
     fill: var(--global-input-backgroundColor);
     padding: 2px;     
 }
+
+@media (prefers-color-scheme: dark) {
+    label svg{
+        background-color: var(--global-page-backgroundColor);
+    }
+}
+
 
 /* option input for checkboxes and radio buttons */
 
@@ -675,7 +734,7 @@ label svg{
 }
 
 .c-custom-option__fake-input--checkbox .c-custom-option__symbol {
-    border: var(--global-borderWidth) solid var(--global-color-neutral-200);
+    border: var(--global-borderWidth) solid var(--global-input-borderColor);
     border-radius: 3px;
     margin-right: var(--global-whitespace-sm);
     align-items: center;
@@ -749,7 +808,9 @@ label svg{
     width: calc(1.5*(3*var(--global-baseline) - 2*var(--global-borderWidth)));
 }
 
-
+@media (prefers-color-scheme: dark) {
+    
+}
 
 /* #endregion */
 
@@ -789,6 +850,12 @@ label svg{
 
 .c-label--option {
     padding-bottom: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    .c-label{
+        color: var(--global-color-neutral-600);
+    }
 }
 
 
